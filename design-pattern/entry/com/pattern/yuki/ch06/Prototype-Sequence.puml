@@ -1,0 +1,25 @@
+@startuml
+Main -> Manager
+activate Manager
+
+Main -> UnderlinePen: '~'
+activate UnderlinePen
+
+Main -> MessageBox: '*' | '/'
+activate MessageBox
+
+Main -> Manager: register
+Main -> Manager: create
+Main <-- Product
+
+Main -> Product: use
+
+alt "strong message" & "Hello, world."
+else "warning box" & "Hello, world."
+else "slash box" & "Hello, world."
+end
+
+deactivate UnderlinePen
+deactivate MessageBox
+
+@enduml

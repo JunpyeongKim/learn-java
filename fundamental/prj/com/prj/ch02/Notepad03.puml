@@ -1,0 +1,38 @@
+@startuml
+
+title Notepad03 \nwith Character Stream
+
+class Notepad03 {
+    -ta : TextArea
+    -nal : NoteActionListener
+    -mb : MenuBar
+    -mfile : Menu
+    -filename : String
+    -fd : FileDialog
+
+    +Notepad03()
+    -itemAdd(title : String, m : Menu) : void
+    +windowClosing(we : WindowEvent) : void
+    +windowClosed(we : WindowEvent) : void
+    +windowOpened(we : WindowEvent) : void
+    +windowIconified(we : WindowEvent) : void
+    +windowDeiconified(we : WindowEvent) : void
+    +windowDeactivated(we : WindowEvent) : void
+    +windowActivated(we : WindowEvent) : void
+    +newFile() : void
+    +loadFile(fn : String) : void
+    +saveFile(fn : String) : void
+    +main(args : String[]) : void {static}
+}
+
+class NoteActionListener03 {
+    -frm : Notepad03
+    -fd : FileDialog
+
+    +NoteActionListener03(frm : Notepad03, fd : FileDialog)
+    +actionPerformed(e : ActionEvent) : void
+}
+
+Notepad03 "1" *-- "1" NoteActionListener03 : Composition
+
+@enduml

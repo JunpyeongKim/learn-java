@@ -1,0 +1,55 @@
+@startuml
+
+[-> Main: main(args[0])
+Main -> Builder: <<Creates>>
+
+Main -> Director: construct
+
+alt Director Act
+    Director -> Builder: makeTitle
+    Director -> Builder: makeString
+    Director -> Builder: makeItems
+    Director -> Builder: makeString
+    Director -> Builder: makeItems
+    Director -> Builder: close
+else "plain"
+    group TextBuilder
+        Main -> TextBuilder
+        activate TextBuilder
+
+        Main -> Director: Builder
+        activate Director
+
+        Main -> Director: construct
+        note right: Director acts
+
+        Director <-- TextBuilder
+        Main <-- Director
+        deactivate Director
+    end
+else "html"
+    group HTMLBuilder
+        Main -> HTMLBuilder
+        activate HTMLBuilder
+
+        Main -> Director: Builder
+        activate Director
+
+        Main -> Director: construct
+        note right: Director atcs
+
+        Director <-- HTMLBuilder
+        Main <-- Director
+
+        deactivate Director
+    end
+end
+
+Main -> Builder: getResult
+deactivate TextBuilder
+deactivate HTMLBuilder
+
+
+
+[<- Main: done
+@enduml

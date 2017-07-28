@@ -1,0 +1,28 @@
+@startuml
+
+[-> Main: args[0]
+activate Main
+
+Main -> Factory: getFactory
+activate Factory
+
+Factory -> Link: createLink
+
+Factory -> Tray: createTray
+Tray -> Tray: add
+
+Factory -> Page: createPage
+deactivate Factory
+Page -> Page: add
+
+Main -> Page: output
+
+[<- Main: LinkPage.html
+deactivate Main
+
+alt "listfactory"
+    Factory -> ListFactory: Class.forName().newInstance()
+else "tablefactory"
+    Factory -> TableFactory: Class.forName().newInstance()
+end
+@enduml

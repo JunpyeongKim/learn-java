@@ -1,0 +1,101 @@
+@startuml
+
+package factory <<Folder>> {
+    abstract class Factory
+    abstract class Page
+    abstract class Item
+    abstract class Link
+    abstract class Tray
+}
+
+package listfactory <<Folder>> {
+    class ListFactory
+    class ListPage
+    class ListLink
+    class ListTray
+}
+
+
+package tablefactory <<Folder>> {
+    class TableFactory
+    class TablePage
+    class TableLink
+    class TableTray
+}
+
+abstract class Factory {
+    +createLink(caption: String, url: String): Link {abstract}
+    +createTray(caption: String): Tray {abstract}
+    +createPage(title: String, author: String): Page {abstract}
+
+    +getFactory(classname: String): Factory {static}
+}
+
+abstract class Page {
+    #title: String
+    #author: String
+    #content: ArrayList<Item>
+
+    +Page(tile: String, author: String)
+    +add(item: Item): void
+    +output(): void
+    +makeHTML(): String {abstract}
+
+}
+
+abstract class Item {
+    #caption: String
+
+    +Item()
+    +makeHTML(): String {abstract}
+}
+
+abstract class Link extends Item {
+    #url: String
+
+    +Link(caption: String, url: String)
+}
+
+abstract class Tray extends Item {
+    #tray: Array<Item>
+
+    +Tray(caption: String)
+    +add(item: Item)
+}
+
+class ListFactory extends Factory {
+    +createLink(caption: String, url: String): Link
+    +createTray(caption: String): Tray
+    +createPage(title: String, author: String): Page
+}
+
+class ListPage extends Page {
+    +makeHTML(): String
+}
+
+class ListLink extends Link {
+    +makeHTML(): String
+}
+
+class ListTray extends Tray {
+    +makeHTML(): String
+}
+
+class TableFactory extends Factory {
+    +createLink(caption: String, url: String): Link
+    +createTray(caption: String): Tray
+    +createPage(title: String, author: String): Page
+}
+
+class TablePage extends Page {
+    +makeHTML(): String
+}
+
+class TableLink extends Link {
+    +makeHTML(): String
+}
+
+class TableTray extends Tray {
+    +makeHTML(): String
+}
+@enduml

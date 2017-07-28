@@ -1,0 +1,14 @@
+@startuml
+
+title Notepad01 \nwith the Byte Stream
+
+class Notepad01 {
+    -file : File
+    -fis : FileInputStream
+    -bis : BufferedInputStream
+
+    +Notepad01()
+    +main(args : String[]) : void {static}
+}
+
+@enduml

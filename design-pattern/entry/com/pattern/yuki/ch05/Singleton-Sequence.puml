@@ -1,0 +1,6 @@
+@startuml
+
+Main -> Singleton: getInstance()
+Main <-- Singleton
+
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+
+class Manager {
+    -showcase: HashMap
+
+    +register(name: String, proto Product)
+    +create(name: String): Product
+}
+
+interface Product extends Cloneable {
+    +use(s: String) {abstract}
+    +createClone(): Product {abstract}
+}
+
+class UnderlinePen implements Product {
+    -ulchar: char
+
+    +UnderlinePen(ulchar: char)
+    +use(s: String)
+    +createClone(): Product
+}
+
+class MessageBox implements Product {
+    -decochar: char
+
+    +MessageBox(decochar: char)
+    +use(s: String)
+    +createClone(): Product
+}
+@enduml

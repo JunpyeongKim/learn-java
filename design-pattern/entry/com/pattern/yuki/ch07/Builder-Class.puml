@@ -1,0 +1,39 @@
+@startuml
+
+abstract class Builder {
+    +makeTitle(title: String) {abstract}
+    +makeString(str: String) {abstract}
+    +makeItems(items: String[]) {abstract}
+    +close() {abstract}
+    +getResult(): String {abstract}
+}
+
+class TextBuilder extends Builder {
+    -buffer: StringBuffer
+
+    +makeTitle(title: String)
+    +makeString(str: String)
+    +makeItems(items: String[])
+    +close()
+    +getResult(): String
+}
+
+class HTMLBuilder extends Builder {
+    -filename: String
+    -writer: PrintWriter
+
+    +makeTitle(title: String)
+    +makeString(str: String)
+    +makeItems(items: String[])
+    +close()
+    +getResult(): String
+}
+
+class Director {
+    -builder: Builder
+
+    +Director(builder: Builder)
+    +construct(): void
+}
+
+@enduml
